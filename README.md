@@ -8,7 +8,7 @@ Jurascraper ist ein vollautomatischer PDF-Scraper für das deutsche Gesetzesport
 - Filtert PDF-Dateien nach Präfix, Substring und Suffix
 - Unterstützt parallele Downloads via `--threads`
 - Vorschau-Modus zur Anzeige potenzieller Treffer (`--preview`)
-- Vollautomatische Installation fehlender Python-Module inkl. PEP-668-Kompatibilität
+- Automatische Nachinstallation fehlender Python-Module (sofern durch die Umgebung erlaubt). Achtung: In PEP-668-konformen Systemen (z. B. systemgepflegte Python-Installationen unter Debian) kann dies blockiert werden – in solchen Fällen bitte manuell `pip install` ausführen.
 - Robust, restartfähig und kompatibel mit `python3`
 
 ## 📦 Installation
