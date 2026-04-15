@@ -1,64 +1,34 @@
-# Jurascraper – Version 3.0
+# JuraScraper
 
-Jurascraper ist ein vollautomatischer PDF-Scraper für das deutsche Gesetzesportal [gesetze-im-internet.de](https://www.gesetze-im-internet.de), bereit für den produktiven Einsatz und juristische Datenverarbeitung.
+**Automated PDF Scraper for German Legal Texts**
 
-## 🚀 Funktionen
+JuraScraper retrieves legal texts from [gesetze-im-internet.de](https://www.gesetze-im-internet.de) — the official publication platform for German federal law. It downloads, filters, and organizes statutory texts as PDFs for local reference, research, or downstream processing.
 
-- Durchsucht systematisch alle Teillisten (A–Z und 0–9)
-- Filtert PDF-Dateien nach Präfix, Substring und Suffix
-- Unterstützt parallele Downloads via `--threads`
-- Vorschau-Modus zur Anzeige potenzieller Treffer (`--preview`)
-- Automatische Nachinstallation fehlender Python-Module (sofern durch die Umgebung erlaubt). Achtung: In PEP-668-konformen Systemen (z. B. systemgepflegte Python-Installationen unter Debian) kann dies blockiert werden – in solchen Fällen bitte manuell `pip install` ausführen.
-- Robust, restartfähig und kompatibel mit `python3`
+---
 
-## 📦 Installation
+## Features
 
-```bash
-# Repository klonen
-git clone https://github.com/dein-user/jurascraper.git
-cd jurascraper
+- **Parallel downloads** — concurrent retrieval with configurable throttling to respect server limits
+- **CLI filtering** — select laws by abbreviation, topic area, or custom patterns
+- **Module self-checks** — built-in validation to detect scraper degradation when the source site changes
+- **Structured output** — consistent file naming and directory organization for integration with other tools
 
-# (Optional) Virtuelle Umgebung erstellen
-python3 -m venv venv
-source venv/bin/activate
-
-# Starten
-python3 jurascraper.py --output_dir ./downloads --limit 20 --contains schul
-```
-
-## ⚙️ Optionen
+## Usage
 
 ```bash
---output_dir     Zielverzeichnis (Pflicht)
---limit          Maximale Anzahl an Downloads (0 = alle)
---startswith/-x  Nur PDFs mit diesem Präfix im Dateinamen
---contains/-y    Nur PDFs, die diesen String enthalten
---endswith/-z    Nur PDFs mit diesem Suffix
---preview/-p     Nur Treffer anzeigen, nicht herunterladen
---threads        Anzahl paralleler Downloads (Standard: 1)
+python jurascraper.py --filter "StGB" --output ./gesetze/
 ```
 
-## 🔒 Hinweis zu `--threads`
-> Mehrere gleichzeitige Downloads erhöhen die Last auf dem Server. Bitte mit Bedacht einsetzen (z. B. `--threads 2` bis `--threads 4`). Zu viele parallele Anfragen können blockiert werden.
+See `--help` for the full set of options.
 
-## 🧠 Beispiel
+## Why
 
-Nur Schulgesetze anzeigen, aber nicht herunterladen:
-```bash
-python3 jurascraper.py --output_dir ./test -y schul -p
-```
+German legal texts are publicly available but not conveniently bulk-accessible. Researchers, compliance teams, and legal tech projects need local corpora without manually downloading hundreds of individual PDFs. JuraScraper fills that gap.
 
-PDFs, die mit "B" beginnen und "2023.pdf" enden, herunterladen (max. 10):
-```bash
-python3 jurascraper.py --output_dir ./test -x B -z 2023.pdf --limit 10
-```
+## Related
 
-## 📝 Lizenz
+- [RegMon](https://github.com/RiswanHassen/regmon) — Regulatory monitoring for German healthcare IT, using similar scraping infrastructure for G-BA, Gematik, and KBV publications
 
-Dieses Projekt steht unter der MIT-Lizenz – siehe [LICENSE](./LICENSE).
+## License
 
-## ✨ Autor
-
-Riswan Hassen – 2025
-
-Für Feedback, Forks und PRs: [github.com/dein-user](https://github.com/dein-user)
+See [LICENSE](LICENSE) for details.
